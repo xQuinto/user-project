@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="${user.name}"></h1>
+<h1 th:text="${user.email}"></h1>
+<p>dob: <span  th:text="${user.dob}"></span></p>
+<p>age: <span  th:text="${age}"></span></p>
+<table>
+    <thead>
+    <tr>
+        <th th:text="ProjectName">Project Title</th>
+        <th th:text="Description">Description</th>
+        <th th:text="Priority">Priority</th>
+        <th th:text="Deadline">deadline</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project: ${projecten}">
+        <td><a th:href="@{'/projects/' + ${project.id}}"><span th:text="${project.projectName}"></span></a></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.priority}"></td>
+        <td th:text="${project.deadline}"></td>
+    </tr>
+    </tbody>
+</table>
+<p>Update:</p>
+<form action="#" th:action="@{/users/updateUser}" th:object="${user}" method="post">
+    <p>Id:</p>
+    <input type="text" th:value="${user.id}" name="id" th:readonly="true"/>
+    <p>Name:</p>
+    <input type="text" th:value="${user.name}" name="name"/>
+    <p>Email:</p>
+    <input type="text" th:value="${user.email}" name="email"/>
+    <br />
+    <input type="submit" />
+</form>
+
+<a th:href="@{'/users/removeUser?id=' + ${user.id}}">Verwijder User</a>
+
+<p>Links:</p>
+<p><a href="/">Home</a></p>
+<p><a href="/projects">Projecten</a></p>
+<p><a href="/users">Users</a></p>
+<p><a href="/json/user">Json Users</a></p>
+<p><a href="/json/project">Json Projects</a></p>
+
+</body>
+</html>

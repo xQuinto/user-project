@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+<span th:text="${projectId}"></span>
+<h1 th:text="${project.projectName}"></h1>
+<h1 th:text="${project.description}"></h1>
+<h1 th:text="${project.priority}"></h1>
+<h1 th:text="${project.deadline}"></h1>
+<h1 th:text="${userName}"></h1>
+<h1 th:text="${project}"></h1>
+-->
+<!--<h1 th:text="${project.student.id}"></h1>-->
+
+<table>
+    <tr>
+        <td>Title Project: </td>
+        <td th:text="${project.projectName}"></td>
+    </tr>
+    <tr>
+        <td>Description: </td>
+        <td th:text="${project.description}"></td>
+    </tr>
+    <tr>
+        <td>Deadline: </td>
+        <td th:text="${project.deadline}"></td>
+    </tr>
+    <tr>
+        <td>Days to finish: </td>
+        <td th:text="${daysLeft}"></td>
+    </tr>
+    <tr>
+        <td>Priority: </td>
+        <td th:text="${project.priority}"></td>
+    </tr>
+    <tr>
+        <td>Finished: </td>
+        <td th:text="${project.finished}"></td>
+    </tr>
+    <tr>
+        <td>User: </td>
+        <td><a th:href="@{'/users/' + ${userId}}"><span th:text="${userName}"></span></a></td>
+       <!-- <td th:text="${userName}"></td>-->
+    </tr>
+</table>
+
+<p>Update</p>
+<form action="#" th:action="@{/projects/updateProject}" th:object="${project}" method="post">
+    <p>Id:</p>
+    <input type="text" th:value="${project.id}" name="id" th:readonly="true"/>
+    <p>Titel:</p>
+    <input type="text" th:value="${project.projectName}" name="projectName"/>
+    <p>Description:</p>
+    <input type="text" th:value="${project.description}" name="description"/>
+    <p>Priority:</p>
+    <input type="text" th:value="${project.priority}" name="priority"/>
+    <br />
+    <input type="submit" />
+</form>
+
+<a th:href="@{'/projects/removeProject?id=' + ${project.id}}">Remove project</a>
+<a th:href="@{'/projects/setFinished?id=' + ${project.id}}">Finish project</a>
+
+<p>Links:</p>
+<p><a href="/">Home</a></p>
+<p><a href="/projects">Projecten</a></p>
+<p><a href="/users">Users</a></p>
+<p><a href="/json/user">Json Users</a></p>
+<p><a href="/json/project">Json Projects</a></p>
+
+
+
+</body>
+</html>
